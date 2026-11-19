@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+coverage
+*.local
+.env
+.env.local
+.env.production
+.DS_Store
+.trivy-cache
+trivy-results.sarif
+latest-app.zip
