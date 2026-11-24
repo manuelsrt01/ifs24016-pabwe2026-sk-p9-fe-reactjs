@@ -95,11 +95,11 @@ export default function PublicArticleList({ user, onNavigate }) {
       </section>
 
       {/* Main Content without Sidebar */}
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         {/* Search & Filter Pills */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="relative flex-1 max-w-xl">
-            <IconSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+            <IconSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-400" />
             <input
               type="search"
               aria-label="Cari artikel"
@@ -118,8 +118,8 @@ export default function PublicArticleList({ user, onNavigate }) {
                 onClick={() => setSelectedCategory(cat)}
                 className={`rounded-full px-4 py-1.5 text-xs font-bold transition ${
                   selectedCategory === cat
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-blue-400'
+                    ? 'bg-blue-700 text-white shadow-sm'
+                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-800 hover:border-blue-400'
                 }`}
               >
                 {cat}
@@ -135,13 +135,13 @@ export default function PublicArticleList({ user, onNavigate }) {
         )}
 
         {loading ? (
-          <div className="mt-12 py-16 text-center text-sm font-medium text-slate-500">
+          <div className="mt-12 py-16 text-center text-sm font-medium text-slate-600 dark:text-slate-300">
             Memuat galeri artikel publik...
           </div>
         ) : posts.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 p-12 text-center">
             <p className="text-lg font-bold text-slate-800 dark:text-slate-100">Belum ada artikel yang ditemukan</p>
-            <p className="mt-1 text-sm text-slate-500">Coba gunakan kata kunci pencarian atau pilih kategori lain.</p>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Coba gunakan kata kunci pencarian atau pilih kategori lain.</p>
           </div>
         ) : (
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -161,22 +161,22 @@ export default function PublicArticleList({ user, onNavigate }) {
                         className="h-44 w-full object-cover"
                       />
                     ) : (
-                      <div className="flex h-44 w-full items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-4xl font-extrabold text-white/30">
+                      <div className="flex h-44 w-full items-center justify-center bg-gradient-to-r from-blue-700 to-indigo-700 text-4xl font-extrabold text-white">
                         {post.category || 'Blog'}
                       </div>
                     )}
 
                     <div className="p-5">
-                      <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
-                        <span className="rounded-full bg-blue-50 dark:bg-blue-950/60 px-3 py-1 font-bold text-blue-600 dark:text-blue-400">
+                      <div className="flex items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
+                        <span className="rounded-full bg-blue-50 dark:bg-blue-950 px-3 py-1 font-bold text-blue-700 dark:text-blue-300">
                           {post.category}
                         </span>
-                        <span className="inline-flex items-center gap-1 font-medium">
+                        <span className="inline-flex items-center gap-1 font-medium text-slate-600 dark:text-slate-300">
                           <IconClock size={14} /> {readingTime} menit baca
                         </span>
                       </div>
 
-                      <h2 className="mt-3 text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                      <h2 className="mt-3 text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-300">
                         <button
                           type="button"
                           onClick={() => onNavigate(`/posts/${post.slug}`)}
@@ -186,20 +186,20 @@ export default function PublicArticleList({ user, onNavigate }) {
                         </button>
                       </h2>
 
-                      <p className="mt-2 line-clamp-3 text-sm text-slate-600 dark:text-slate-400">
+                      <p className="mt-2 line-clamp-3 text-sm text-slate-600 dark:text-slate-300">
                         {post.excerpt}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 px-5 py-3.5 text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 font-semibold text-slate-700 dark:text-slate-300">
+                  <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 px-5 py-3.5 text-xs text-slate-600 dark:text-slate-300">
+                    <span className="inline-flex items-center gap-1.5 font-semibold text-slate-700 dark:text-slate-200">
                       <IconUser size={14} /> @{authorName} · {formatDate(post.published_at || post.created_at)}
                     </span>
                     <button
                       type="button"
                       onClick={() => onNavigate(`/posts/${post.slug}`)}
-                      className="inline-flex items-center gap-1 font-bold text-blue-600 hover:underline"
+                      className="inline-flex items-center gap-1 font-bold text-blue-700 dark:text-blue-300 hover:underline"
                     >
                       Baca <IconArrowRight size={14} />
                     </button>
@@ -209,7 +209,7 @@ export default function PublicArticleList({ user, onNavigate }) {
             })}
           </div>
         )}
-      </main>
+      </div>
     </div>
   )
 }

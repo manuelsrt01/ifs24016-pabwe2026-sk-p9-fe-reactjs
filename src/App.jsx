@@ -144,7 +144,7 @@ export default function App() {
         onToggleTheme={toggleTheme}
       />
 
-      <div className="flex-1">{renderPage()}</div>
+      <main className="flex-1">{renderPage()}</main>
 
       <AuthModal
         isOpen={authModalOpen}

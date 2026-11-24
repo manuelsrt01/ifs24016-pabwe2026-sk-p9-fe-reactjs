@@ -134,7 +134,7 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">
             Workspace Penulis {user?.username ? `(@${user.username})` : ''}
           </h1>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
             Kelola publikasi artikel Anda, pantau statistik, dan rancang konten dengan AI Generator.
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
           <button
             type="button"
             onClick={() => setAiModalOpen(true)}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-fuchsia-600 hover:brightness-110 px-4 py-2.5 text-sm font-bold text-white shadow-md transition"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-700 to-fuchsia-700 hover:brightness-110 px-4 py-2.5 text-sm font-bold text-white shadow-md transition"
           >
             <IconSparkles size={18} /> AI Generator
           </button>
@@ -151,7 +151,7 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
           <button
             type="button"
             onClick={handleOpenCreate}
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-4 py-2.5 text-sm font-bold text-white shadow-md transition"
+            className="inline-flex items-center gap-2 rounded-xl bg-blue-700 hover:bg-blue-800 px-4 py-2.5 text-sm font-bold text-white shadow-md transition"
           >
             <IconPlus size={18} /> Tambah Artikel
           </button>
@@ -176,7 +176,7 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-sm text-slate-500">
+          <div className="p-12 text-center text-sm text-slate-600 dark:text-slate-300">
             Memuat data artikel penulis...
           </div>
         ) : filteredPosts.length === 0 ? (
@@ -184,14 +184,14 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
             <p className="text-base font-bold text-slate-700 dark:text-slate-200">
               Belum ada artikel pada kategori status ini
             </p>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">
               Klik tombol &quot;Tambah Artikel&quot; atau &quot;AI Generator&quot; untuk mulai membuat artikel.
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+              <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs font-bold uppercase text-slate-700 dark:text-slate-200">
                 <tr>
                   <th className="px-6 py-3.5">Judul & Ringkasan</th>
                   <th className="px-4 py-3.5">Kategori</th>
@@ -211,16 +211,16 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
                         <div className="font-bold text-slate-900 dark:text-white">
                           {post.title}
                         </div>
-                        <div className="mt-0.5 line-clamp-1 text-xs text-slate-500">
+                        <div className="mt-0.5 line-clamp-1 text-xs text-slate-600 dark:text-slate-300">
                           {post.excerpt}
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <span className="rounded-full bg-blue-50 dark:bg-blue-950 px-3 py-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+                        <span className="rounded-full bg-blue-50 dark:bg-blue-950 px-3 py-1 text-xs font-bold text-blue-700 dark:text-blue-300">
                           {post.category}
                         </span>
                       </td>
-                      <td className="px-4 py-4 text-xs text-slate-600 dark:text-slate-400">
+                      <td className="px-4 py-4 text-xs text-slate-600 dark:text-slate-300">
                         <span className="inline-flex items-center gap-1">
                           <IconClock size={14} /> {readingTime} mnt
                         </span>
@@ -232,8 +232,8 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
                           aria-label={`Toggle status ${post.title}`}
                           className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold transition ${
                             post.is_published
-                              ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300'
-                              : 'bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-950/70 dark:text-amber-300'
+                              ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 dark:bg-emerald-950 dark:text-emerald-300'
+                              : 'bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-950 dark:text-amber-300'
                           }`}
                         >
                           <span
@@ -244,7 +244,7 @@ export default function AuthorDashboard({ user, onNavigate, isDark = false }) {
                           {post.is_published ? 'Terbit' : 'Draf'}
                         </button>
                       </td>
-                      <td className="px-4 py-4 text-xs text-slate-500">
+                      <td className="px-4 py-4 text-xs text-slate-600 dark:text-slate-300">
                         {formatDate(post.published_at || post.created_at)}
                       </td>
                       <td className="relative px-6 py-4 text-right">

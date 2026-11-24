@@ -4,6 +4,7 @@ import MarkdownEditor from './MarkdownEditor'
 import MarkdownViewer from './MarkdownViewer'
 
 let lastEditorOptions = null
+let lastViewerOptions = null
 let currentMarkdown = ''
 
 vi.mock('@toast-ui/editor', () => {
@@ -28,7 +29,7 @@ vi.mock('@toast-ui/editor/dist/toastui-editor-viewer', () => {
   return {
     default: class MockViewer {
       constructor(options) {
-        this.options = options
+        lastViewerOptions = options
       }
       destroy() {}
     },
@@ -36,12 +37,16 @@ vi.mock('@toast-ui/editor/dist/toastui-editor-viewer', () => {
 })
 
 describe('MarkdownComponents', () => {
-  it('renders MarkdownEditor, handles change events, external value updates, and dark theme', () => {
+  it('renders MarkdownEditor, handles change events, external value updates, and dark theme', async () => {
     const handleChange = vi.fn()
     const { rerender, unmount } = render(
       <MarkdownEditor value="Initial" onChange={handleChange} theme="dark" />
     )
     expect(screen.getByTestId('markdown-editor')).toBeInTheDocument()
+
+    await vi.waitFor(() => {
+      expect(lastEditorOptions).not.toBeNull()
+    })
 
     // Trigger editor internal change event
     currentMarkdown = 'Edited content'
@@ -50,7 +55,9 @@ describe('MarkdownComponents', () => {
 
     // Rerender with new external value and light theme
     rerender(<MarkdownEditor value="Updated externally" onChange={handleChange} theme="light" />)
-    expect(currentMarkdown).toBe('Updated externally')
+    await vi.waitFor(() => {
+      expect(currentMarkdown).toBe('Updated externally')
+    })
 
     // Rerender with empty value
     rerender(<MarkdownEditor value="" theme="light" />)
@@ -59,17 +66,28 @@ describe('MarkdownComponents', () => {
     // Trigger change when onChange is not provided
     lastEditorOptions.events.change()
 
-    // Rerender with default props
-    rerender(<MarkdownEditor />)
+    // Rerender with default props and unmount before async resolves to cover cancelled branch
+    rerender(<MarkdownEditor height="400px" />)
     unmount()
   })
 
-  it('renders MarkdownViewer in light and dark themes', () => {
+  it('renders MarkdownViewer in light and dark themes', async () => {
+    lastViewerOptions = null
     const { rerender, unmount } = render(<MarkdownViewer content="# Heading" theme="dark" />)
     expect(screen.getByTestId('markdown-viewer')).toBeInTheDocument()
 
+    await vi.waitFor(() => {
+      expect(lastViewerOptions).not.toBeNull()
+      expect(lastViewerOptions.theme).toBe('dark')
+    })
+
     rerender(<MarkdownViewer content="" theme="light" />)
+    await vi.waitFor(() => {
+      expect(lastViewerOptions.theme).toBe('default')
+    })
+
     rerender(<MarkdownViewer />)
     unmount()
+    await new Promise((r) => setTimeout(r, 10))
   })
 })

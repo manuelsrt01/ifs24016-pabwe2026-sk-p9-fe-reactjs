@@ -1,19 +1,30 @@
 import { useEffect, useRef } from 'react'
-import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer'
-import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 
 export default function MarkdownViewer({ content = '', theme = 'light' }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
-    const viewer = new Viewer({
-      el: containerRef.current,
-      initialValue: content || '',
-      theme: theme === 'dark' ? 'dark' : 'default',
+    let cancelled = false
+    let viewer = null
+
+    Promise.all([
+      import('@toast-ui/editor/dist/toastui-editor-viewer'),
+      import('@toast-ui/editor/dist/toastui-editor-viewer.css'),
+    ]).then(([{ default: Viewer }]) => {
+      if (!cancelled) {
+        viewer = new Viewer({
+          el: containerRef.current,
+          initialValue: content,
+          theme: theme === 'dark' ? 'dark' : 'default',
+        })
+      }
     })
 
     return () => {
-      viewer.destroy()
+      cancelled = true
+      if (viewer) {
+        viewer.destroy()
+      }
     }
   }, [content, theme])
 

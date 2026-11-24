@@ -1,6 +1,4 @@
 import { useEffect, useRef } from 'react'
-import Editor from '@toast-ui/editor'
-import '@toast-ui/editor/dist/toastui-editor.css'
 
 export default function MarkdownEditor({
   value = '',
@@ -12,33 +10,46 @@ export default function MarkdownEditor({
   const containerRef = useRef(null)
   const editorRef = useRef(null)
   const onChangeRef = useRef(onChange)
+  const valueRef = useRef(value)
   onChangeRef.current = onChange
+  valueRef.current = value
 
   useEffect(() => {
-    const instance = new Editor({
-      el: containerRef.current,
-      height,
-      initialEditType: 'markdown',
-      previewStyle: 'vertical',
-      initialValue: value,
-      placeholder,
-      theme: theme === 'dark' ? 'dark' : 'default',
-      usageStatistics: false,
-      events: {
-        change: () => {
-          if (onChangeRef.current) {
-            onChangeRef.current(instance.getMarkdown())
-          }
+    let cancelled = false
+    let instance = null
+
+    Promise.all([
+      import('@toast-ui/editor'),
+      import('@toast-ui/editor/dist/toastui-editor.css'),
+    ]).then(([{ default: Editor }]) => {
+      if (cancelled) return
+      instance = new Editor({
+        el: containerRef.current,
+        height,
+        initialEditType: 'markdown',
+        previewStyle: 'vertical',
+        initialValue: valueRef.current,
+        placeholder,
+        theme: theme === 'dark' ? 'dark' : 'default',
+        usageStatistics: false,
+        events: {
+          change: () => {
+            if (onChangeRef.current) {
+              onChangeRef.current(instance.getMarkdown())
+            }
+          },
         },
-      },
+      })
+      editorRef.current = instance
     })
-    editorRef.current = instance
 
     return () => {
-      instance.destroy()
+      cancelled = true
+      if (instance) {
+        instance.destroy()
+      }
       editorRef.current = null
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [height, placeholder, theme])
 
   useEffect(() => {

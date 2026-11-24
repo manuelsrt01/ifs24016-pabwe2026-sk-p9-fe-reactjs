@@ -58,7 +58,7 @@ export default function AdminDashboard({ onNavigate }) {
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">
           Admin Dashboard — Monitoring Sistem Delcom Blog
         </h1>
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
           Pantau seluruh akun pengguna, statistik kontribusi penulis, dan arsip artikel sistem.
         </p>
       </div>
@@ -67,31 +67,31 @@ export default function AdminDashboard({ onNavigate }) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div className="flex items-center justify-between rounded-2xl border border-blue-200 bg-blue-50/70 dark:border-blue-900 dark:bg-blue-950/40 p-5">
           <div>
-            <p className="text-xs font-bold uppercase text-blue-700 dark:text-blue-300">Total Pengguna</p>
+            <p className="text-xs font-bold uppercase text-blue-800 dark:text-blue-200">Total Pengguna</p>
             <p className="mt-1 text-3xl font-extrabold text-blue-900 dark:text-white">{users.length}</p>
           </div>
-          <IconUsers size={30} className="text-blue-600" />
+          <IconUsers size={30} className="text-blue-700 dark:text-blue-300" />
         </div>
 
         <div className="flex items-center justify-between rounded-2xl border border-indigo-200 bg-indigo-50/70 dark:border-indigo-900 dark:bg-indigo-950/40 p-5">
           <div>
-            <p className="text-xs font-bold uppercase text-indigo-700 dark:text-indigo-300">Total Seluruh Artikel</p>
+            <p className="text-xs font-bold uppercase text-indigo-800 dark:text-indigo-200">Total Seluruh Artikel</p>
             <p className="mt-1 text-3xl font-extrabold text-indigo-900 dark:text-white">{posts.length}</p>
           </div>
-          <IconFiles size={30} className="text-indigo-600" />
+          <IconFiles size={30} className="text-indigo-700 dark:text-indigo-300" />
         </div>
 
         <div className="flex items-center justify-between rounded-2xl border border-emerald-200 bg-emerald-50/70 dark:border-emerald-900 dark:bg-emerald-950/40 p-5">
           <div>
-            <p className="text-xs font-bold uppercase text-emerald-700 dark:text-emerald-300">Total Artikel Terbit</p>
+            <p className="text-xs font-bold uppercase text-emerald-800 dark:text-emerald-200">Total Artikel Terbit</p>
             <p className="mt-1 text-3xl font-extrabold text-emerald-900 dark:text-white">{totalPublished}</p>
           </div>
-          <IconCircleCheck size={30} className="text-emerald-600" />
+          <IconCircleCheck size={30} className="text-emerald-700 dark:text-emerald-300" />
         </div>
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-12 text-center text-sm text-slate-500">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-12 text-center text-sm text-slate-600 dark:text-slate-300">
           Memuat data pengawasan admin...
         </div>
       ) : (
@@ -106,7 +106,7 @@ export default function AdminDashboard({ onNavigate }) {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs font-bold uppercase text-slate-700 dark:text-slate-200">
                   <tr>
                     <th className="px-6 py-3.5">ID</th>
                     <th className="px-4 py-3.5">Username</th>
@@ -125,7 +125,7 @@ export default function AdminDashboard({ onNavigate }) {
                       <tr key={u.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40">
                         <td className="px-6 py-3.5 font-mono text-xs font-bold">#{u.id}</td>
                         <td className="px-4 py-3.5 font-bold text-slate-900 dark:text-white">@{u.username}</td>
-                        <td className="px-4 py-3.5 text-slate-600 dark:text-slate-400">{u.email}</td>
+                        <td className="px-4 py-3.5 text-slate-600 dark:text-slate-300">{u.email}</td>
                         <td className="px-4 py-3.5">
                           <span
                             className={`rounded-full px-3 py-1 text-xs font-bold ${
@@ -138,12 +138,12 @@ export default function AdminDashboard({ onNavigate }) {
                           </span>
                         </td>
                         <td className="px-4 py-3.5 font-bold">{totalArt}</td>
-                        <td className="px-4 py-3.5 font-bold text-emerald-600">{totalPub}</td>
+                        <td className="px-4 py-3.5 font-bold text-emerald-700 dark:text-emerald-300">{totalPub}</td>
                         <td className="px-6 py-3.5 text-right">
                           <button
                             type="button"
                             onClick={() => handleInspectUserPosts(u)}
-                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-1.5 text-xs font-bold text-blue-600 hover:bg-blue-50"
+                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-1.5 text-xs font-bold text-blue-700 dark:text-blue-300 hover:bg-blue-50"
                           >
                             <IconEye size={14} /> Lihat Artikel
                           </button>
@@ -167,19 +167,19 @@ export default function AdminDashboard({ onNavigate }) {
                   type="button"
                   aria-label="Tutup detail artikel pengguna"
                   onClick={() => setSelectedUser(null)}
-                  className="rounded-lg p-1 text-slate-500 hover:bg-slate-200"
+                  className="rounded-lg p-1 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                 >
                   <IconX size={18} />
                 </button>
               </div>
               {userPosts.length === 0 ? (
-                <p className="mt-3 text-xs text-slate-500">Pengguna ini belum menulis artikel.</p>
+                <p className="mt-3 text-xs text-slate-600 dark:text-slate-300">Pengguna ini belum menulis artikel.</p>
               ) : (
                 <ul className="mt-3 divide-y divide-slate-200 dark:divide-slate-800 text-sm">
                   {userPosts.map((up) => (
                     <li key={up.id} className="flex items-center justify-between py-2">
                       <span className="font-semibold">{up.title}</span>
-                      <span className="text-xs text-slate-500">
+                      <span className="text-xs text-slate-600 dark:text-slate-300">
                         {up.category} · {up.is_published ? 'Terbit' : 'Draf'}
                       </span>
                     </li>
@@ -199,7 +199,7 @@ export default function AdminDashboard({ onNavigate }) {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
+                <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs font-bold uppercase text-slate-700 dark:text-slate-200">
                   <tr>
                     <th className="px-6 py-3.5">Judul</th>
                     <th className="px-4 py-3.5">Penulis</th>
@@ -221,21 +221,21 @@ export default function AdminDashboard({ onNavigate }) {
                         <span
                           className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
                             p.is_published
-                              ? 'bg-emerald-100 text-emerald-800'
-                              : 'bg-amber-100 text-amber-800'
+                              ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                              : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
                           }`}
                         >
                           {p.is_published ? 'Terbit' : 'Draf'}
                         </span>
                       </td>
-                      <td className="px-4 py-3.5 text-xs text-slate-500">
+                      <td className="px-4 py-3.5 text-xs text-slate-600 dark:text-slate-300">
                         {formatDate(p.published_at || p.created_at)}
                       </td>
                       <td className="px-6 py-3.5 text-right">
                         <button
                           type="button"
                           onClick={() => onNavigate(`/posts/${p.slug}`)}
-                          className="text-xs font-bold text-blue-600 hover:underline"
+                          className="text-xs font-bold text-blue-700 dark:text-blue-300 hover:underline"
                         >
                           Buka
                         </button>

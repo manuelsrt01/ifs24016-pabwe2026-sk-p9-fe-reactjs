@@ -49,7 +49,7 @@ export default function AuthPage({ mode = 'login', onAuthSuccess, onNavigate }) 
         <button
           type="button"
           onClick={() => onNavigate('/')}
-          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600"
+          className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-700 dark:hover:text-blue-300"
         >
           <IconArrowLeft size={18} /> Kembali ke Beranda Publik
         </button>
@@ -57,7 +57,7 @@ export default function AuthPage({ mode = 'login', onAuthSuccess, onNavigate }) 
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
           {isRegister ? 'Daftar Akun Penulis' : 'Masuk ke Delcom Blog'}
         </h1>
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
           {isRegister
             ? 'Mulai tulis dan publikasikan artikel berkualitas Anda.'
             : 'Kelola artikel dan gunakan AI Blog Generator.'}
@@ -119,14 +119,14 @@ export default function AuthPage({ mode = 'login', onAuthSuccess, onNavigate }) 
           </button>
         </form>
 
-        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4 text-center text-sm text-slate-600 dark:text-slate-400">
+        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4 text-center text-sm text-slate-600 dark:text-slate-300">
           {isRegister ? (
             <>
               Sudah memiliki akun?{' '}
               <button
                 type="button"
                 onClick={() => onNavigate('/login')}
-                className="font-semibold text-blue-600 hover:underline"
+                className="font-semibold text-blue-700 dark:text-blue-300 hover:underline"
               >
                 Masuk di sini
               </button>
@@ -137,7 +137,7 @@ export default function AuthPage({ mode = 'login', onAuthSuccess, onNavigate }) 
               <button
                 type="button"
                 onClick={() => onNavigate('/register')}
-                className="font-semibold text-blue-600 hover:underline"
+                className="font-semibold text-blue-700 dark:text-blue-300 hover:underline"
               >
                 Daftar Akun Baru
               </button>
